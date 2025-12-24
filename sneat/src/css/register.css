@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+.register {
+    width: 100%;
+    height: 100vh;
+}
+.register .container {
+    height: 100vh;
+    display: flex;
+     width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+.register .left {
+    width: 77%;
+    height: 100%;
+    background-color: #f5f5f9;
+    position: relative;
+}
+.register .left .banner {
+    background: url(../imgs/login/6.png) no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 23%;
+}
+.register .right {
+    width: 36%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 110px;
+    margin: auto 0;
+    gap: 15px;
+}
+.register .right .right1 {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.register .right .right1 h1 {
+    color: #32475cde;
+    font-size: 28px;
+}
+.register .right .p1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #32475cde;
+}
+.register .right .p2 {
+    color: #989da8;
+}
+.register .right .right2 {
+    display: flex;
+    align-items: center;
+    color: #989da8;
+    font-size: 14px;
+}
+.register .right .right2 .li {
+    color: #696cff;
+}
+.register .right .right4 {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #989da8;
+    font-size: 14px;
+}
+.register .right .right4 a {
+    color: #696cff;
+    text-decoration: none;
+}
+.register .right .right5 {
+  position: relative;
+  text-align: center;
+  color: #32475cde;
+}
+.register .right .right5::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #dbdaea;
+  z-index: 0;
+}
+.register .right .right5 span {
+  background: white; 
+  padding: 0 8px;
+  position: relative;
+  z-index: 1;
+}
+.register .right .right6 {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.register .right .right6 img {
+  width: 20px;
+  height: 20px;
+}
+.register .right .right6 img:hover {
+ cursor: pointer;
+}
