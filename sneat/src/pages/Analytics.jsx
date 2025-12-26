@@ -2,11 +2,19 @@ import React, { useRef, useState, useEffect } from 'react'
 import * as echarts from "echarts"
 import axios from 'axios'
 import Header from '../pages/Header'
+import Footer from '../pages/Footer'
 import img01 from "../imgs/analytics/1.png"
 import img02 from "../imgs/analytics/2.png"
 import img03 from "../imgs/analytics/3.png"
 import img04 from "../imgs/analytics/4.png"
 import img05 from "../imgs/analytics/5.png"
+import img06 from "../imgs/analytics/6.png"
+import img07 from "../imgs/analytics/7.png"
+import img08 from "../imgs/analytics/8.png"
+import img09 from "../imgs/index/7.png"
+import Divider from '@mui/material/Divider';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
 import '../css/analytics.css';
 
 export default function Analytics() {
@@ -15,14 +23,47 @@ export default function Analytics() {
   const [isOpen, setIsOpen] = useState(false);
   const [shown1, setShown1] = useState(false);
   const [shown2, setShown2] = useState(false);
+  const [shown3, setShown3] = useState(false);
+  const [shown4, setShown4] = useState(false);
   const yearRef = useRef(null);
   const payRef = useRef(null);
   const orderRef = useRef(null);
+  const transRef = useRef(null);
+  const actRef = useRef(null);
   const years = [2025, 2024, 2023, 2022];
   const [selectedCategory, setSelectedCategory] = useState("INCOME");
   const categories = ["INCOME", "EXPENSES", "PROFIT"];
+  const categories1 = ["BROWSER", "OPERATING SYSTEM", "COUNTRY"];
+  const [selectedCategory1, setSelectedCategory1] = useState("BROWSER");
+  const users = [
+    { id: 1, src: 'https://greakproject.vercel.app/images/avatars/5.png', name: 'Howard Lloyd' },
+    { id: 2, src: 'https://greakproject.vercel.app/images/avatars/12.png', name: 'Katie Lane' },
+    { id: 3, src: 'https://greakproject.vercel.app/images/avatars/9.png', name: 'George Allen' },
+    { id: 4, src: 'https://greakproject.vercel.app/images/avatars/6.png', name: 'Alice Cobb' },
+    { id: 5, src: 'https://greakproject.vercel.app/images/avatars/14.png', name: 'Jeffery Warner' },
+  ];
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 8,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[200],
+    ...theme.applyStyles('dark', {
+      backgroundColor: theme.palette.grey[800],
+    }),
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: 'currentcolor',
+    ...theme.applyStyles('dark', {
+      backgroundColor: 'currentcolor',
+    }),
+  },
+}));
   const Click = (category) => {
     setSelectedCategory(category);
+  };
+  const Click1 = (category) => {
+    setSelectedCategory1(category);
   };
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -57,13 +98,27 @@ export default function Analytics() {
         setShown2(false);
       }
     };
+    const handleClickOutside3 = (event) => {
+      if (transRef.current && !transRef.current.contains(event.target)) {
+        setShown3(false);
+      }
+    };
+    const handleClickOutside4 = (event) => {
+      if (actRef.current && !actRef.current.contains(event.target)) {
+        setShown4(false);
+      }
+    };
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('mousedown', handleClickOutside1);
     document.addEventListener('mousedown', handleClickOutside2);
+    document.addEventListener('mousedown', handleClickOutside3);
+    document.addEventListener('mousedown', handleClickOutside4);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('mousedown', handleClickOutside1);
       document.removeEventListener('mousedown', handleClickOutside2);
+      document.removeEventListener('mousedown', handleClickOutside3);
+      document.removeEventListener('mousedown', handleClickOutside4);
     };
   }, []);
 
@@ -75,6 +130,12 @@ export default function Analytics() {
   }
   const handleClick2 = () => {
     setShown2(!shown2)
+  }
+  const handleClick3 = () => {
+    setShown3(!shown3)
+  }
+  const handleClick4 = () => {
+    setShown4(!shown4)
   }
   const [selectedYear, setSelectedYear] = useState(2025);
   const [chartData, setChartData] = useState({ current: [], previous: [], currentprofit: [], previousprofit: [], currentincome: [], currentexpense: [] });
@@ -723,8 +784,6 @@ export default function Analytics() {
     <div className="ana">
       <div class="top-blur"></div>
       <div className="container">
-        <div className="s1"><Header /></div>
-        <div className="content">
           <div className="s2">
             <div className="s21">
               <div className="s211">
@@ -1124,9 +1183,355 @@ export default function Analytics() {
                 </div>
               )}
             </div>
-            <div className="s43"></div>
+            <div className="s43">
+              <div className="s431">
+                <p style={{ fontSize: 20, color: '#32475cde', fontWeight: 500, lineHeight: 1.5 }}>Transactions</p>
+                <div className="s4111" ref={transRef} onClick={handleClick3}>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="22px" class="iconify iconify--bx" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2z"></path></svg>
+                  {shown3 && <div className="smbar">
+                    <div>Refresh</div>
+                    <div>Share</div>
+                    <div>Update</div>
+                  </div>}
+                </div>
+              </div>
+              <div className="s432">
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img03} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Paypal</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Send Money</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>+82.6</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img04} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Wallet</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Mac'D</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>+270.69</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img05} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Transfer</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Refund</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>+637.91</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img06} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Credit Card</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Ordered Food</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>-838.71</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img04} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Wallet</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Starbucks</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>+203.33</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+                <div className="s4321">
+                  <div className="left">
+                    <img src={img07} alt="" />
+                    <div>
+                      <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.2, fontWeight: 500 }}>Mastercard</p>
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Ordered Food</p>
+                    </div>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>-92.45</p>
+                    <p style={{ color: '#32475c61', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>USD</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <div className="s5">
+            <div className="s51">
+              <div className="s511">
+                <p style={{ fontSize: 20, color: '#32475cde', fontWeight: 500, lineHeight: 1.5 }}>Activity Timeline</p>
+                <div className="s4111" ref={actRef} onClick={handleClick4}>
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="22px" class="iconify iconify--bx" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2z"></path></svg>
+                  {shown4 && <div className="smbar">
+                    <div>Refresh</div>
+                    <div>Share</div>
+                    <div>Update</div>
+                  </div>}
+                </div>
+              </div>
+              <div className="s512">
+                <div className="left">
+                  <span className="line"></span>
+                  <span className="dot1">
+                    <span className="inner">
+                      <span className="inner1"></span>
+                    </span>
+                  </span>
+                  <span className="dot2">
+                    <span className="inner">
+                      <span className="inner1"></span>
+                    </span>
+                  </span>
+                  <span className="dot3">
+                    <span className="inner">
+                      <span className="inner1"></span>
+                    </span>
+                  </span>
+                </div>
+                <div className="right">
+                  <div className="right1">
+                    <div className="right2">
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>12 Invoices have been paid</p>
+                      <p style={{ color: '#32475c99', fontSize: 16, lineHeight: 1.5, fontWeight: 400 }}>Invoices have been paid to the company</p>
+                      <p><img src={img08} style={{ width: 24, height: 24 }} alt="" />Invoices.pdf</p>
+                    </div>
+                    <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.4 }}>12 min ago</p>
+                  </div>
+                  <div className="right1">
+                    <div className="right2">
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Client Meeting</p>
+                      <p style={{ color: '#32475c99', fontSize: 16, lineHeight: 1.5, fontWeight: 400 }}>Project meeting with john @10:15am</p>
+                      <p><img src={img09} style={{ width: 38, height: 38, borderRadius: '50%' }} alt="" />Steven Nash (Client) <br />CEO of ThemeSelection</p>
+                    </div>
+                    <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.4 }}>45 min ago</p>
+                  </div>
+                  <div className="right1">
+                    <div className="right2">
+                      <p style={{ color: '#32475cde', fontSize: 16, lineHeight: 1.5, fontWeight: 500 }}>Create a new project for client</p>
+                      <p style={{ color: '#32475c99', fontSize: 16, lineHeight: 1.5, fontWeight: 400 }}>5 team members in a project</p>
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {users.map((user, index) => (
+                          <div className="user" key={user.id}
+                            style={{
+                              cursor: 'pointer',
+                              marginLeft: index > 0 ? '-8px' : '0',
+                              zIndex: 10 - index,
+                              transition: 'all 0.3s ease',
+                               position: 'relative',
+                              }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = 'translateY(-4px)';
+                              e.currentTarget.style.zIndex = '100';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)';
+                              e.currentTarget.style.zIndex = 10 - index;
+                            }}
+                          >
+                            <img
+                              src={user.src}
+                              alt={user.name}
+                              style={{
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '50%',
+                                overflow:'hidden',
+                                border: '2px solid white',                            
+                              }}
+                            />
+                            <div className="name">
+                              {user.name}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <p style={{ color: '#32475c61', fontSize: 14, lineHeight: 1.4 }}>2 days ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="s52">
+              <div className="s521">
+                {categories1.map((category) => (
+                  <div className={`s5211 ${selectedCategory1 === category ? 'selected' : ''}`}
+                    onClick={() => Click1(category)}>{category}</div>
+                ))}
+              </div>
+              <Divider />
+              {selectedCategory1 === "BROWSER" && (
+              <table className="s522">
+                <thead>
+               <tr>
+                <th>No.</th>
+                <th>Browser</th>
+                <th>Visits</th>
+                <th>Data in Percentage</th>
+               </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{fontSize:14}}>1</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/chrome.png" alt="" />Chrome</div></td>
+                    <td style={{fontWeight:600}}>8.92k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={64.91} style={{flex:1,color:'#71dd37'}}/>64.91%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>2</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/safari.png" alt="" />Safari</div></td>
+                    <td style={{fontWeight:600}}>1.29k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={36} style={{flex:1,color:'#696cff'}}/>19.03%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>3</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/firefox.png" alt="" />Firefox</div></td>
+                    <td style={{fontWeight:600}}>328</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={23} style={{flex:1,color:'#03c3ec'}}/>3.26%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>4</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/edge.png" alt="" />Edge</div></td>
+                    <td style={{fontWeight:600}}>142</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={25} style={{flex:1,color:'#ffab00'}}/>3.99%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>5</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/opera.png" alt="" />Opera</div></td>
+                    <td style={{fontWeight:600}}>85</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={22} style={{flex:1,color: '#ff3e1d'}}/>2.12%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>6</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/brave.png" alt="" />Brave</div></td>
+                    <td style={{fontWeight:600}}>36</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={18} style={{flex:1,color:'#03c3ec'}}/>1.06%</div></td>
+                  </tr>
+                </tbody>
+              </table>
+              )}
+              {selectedCategory1 === "OPERATING SYSTEM" && (
+              <table className="s522">
+                <thead>
+               <tr>
+                <th>No.</th>
+                <th>System</th>
+                <th>Visits</th>
+                <th>Data in Percentage</th>
+               </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{fontSize:14}}>1</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/windows.png" alt="" />Windows</div></td>
+                    <td style={{fontWeight:600}}>475.26k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={61.5} style={{flex:1,color:'#71dd37'}}/>61.5%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>2</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/mac.png" alt="" />Mac</div></td>
+                    <td style={{fontWeight:600}}>89.12k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={36} style={{flex:1,color:'#696cff'}}/>15.67%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>3</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/ubuntu.png" alt="" />Ubuntu</div></td>
+                    <td style={{fontWeight:600}}>38.68K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={23} style={{flex:1,color:'#03c3ec'}}/>5.82%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>4</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/linux.png" alt="" />Linux</div></td>
+                    <td style={{fontWeight:600}}>30.27K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={25} style={{flex:1,color:'#ffab00'}}/>5.03%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>5</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/chrome.png" alt="" />Chrome</div></td>
+                    <td style={{fontWeight:600}}>8.34K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={22} style={{flex:1,color: '#ff3e1d'}}/>3.25%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>6</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/cent.png" alt="" />Cent</div></td>
+                    <td style={{fontWeight:600}}>2.25K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={18} style={{flex:1,color:'#03c3ec'}}/>1.76%</div></td>
+                  </tr>
+                </tbody>
+              </table>
+              )}
+              {selectedCategory1 === "COUNTRY" && (
+              <table className="s522">
+                <thead>
+               <tr>
+                <th>No.</th>
+                <th>country</th>
+                <th>Visits</th>
+                <th>Data in Percentage</th>
+               </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{fontSize:14}}>1</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/usa.png" alt="" />Usa</div></td>
+                    <td style={{fontWeight:600}}>87.24k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={51.5} style={{flex:1,color:'#71dd37'}}/>38.12%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>2</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/brazil.png" alt="" />Brazil</div></td>
+                    <td style={{fontWeight:600}}>42.69k</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={44} style={{flex:1,color:'#696cff'}}/>28.23%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>3</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/india.png" alt="" />India</div></td>
+                    <td style={{fontWeight:600}}>12.58K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={23} style={{flex:1,color:'#03c3ec'}}/>13.82%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>4</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/australia.png" alt="" />Australia</div></td>
+                    <td style={{fontWeight:600}}>4.13K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={25} style={{flex:1,color:'#ffab00'}}/>12.72%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>5</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/china.png" alt="" />China</div></td>
+                    <td style={{fontWeight:600}}>2.21K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={22} style={{flex:1,color: '#ff3e1d'}}/>7.11%</div></td>
+                  </tr>
+                  <tr>
+                    <td style={{fontSize:14}}>6</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',marginTop: -3}}><img src="https://greakproject.vercel.app/images/cards/france.png" alt="" />France</div></td>
+                    <td style={{fontWeight:600}}>1.56K</td>
+                    <td><div style={{display: 'flex',alignItems: 'center',gap:16,justifyContent:'space-between',fontSize:14,fontWeight:600}}><BorderLinearProgress variant="determinate" value={18} style={{flex:1,color:'#03c3ec'}}/>6.59%</div></td>
+                  </tr>
+                </tbody>
+              </table>
+              )}
+            </div>
+          </div>
       </div>
     </div>
   )

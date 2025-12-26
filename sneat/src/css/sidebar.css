@@ -7,9 +7,9 @@
 }
 .sidebar {
     background-color: white;
-    /* width: 13.5%; */
     height: 100vh;
     position: relative;
+    transition: all 0.5s ease;
 }
 .sidebar .container::-webkit-scrollbar {
     width: 0px;  
@@ -70,7 +70,7 @@
     justify-content: center;
     cursor: pointer;
 }
-.sidebar  .arr div {
+.sidebar .arr div {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -88,7 +88,7 @@
     margin-top: 10px;
 }
 .sidebar .s1 h1 {
-    color: #4d5f71;
+    color: #32475cde;
     font-size: 28px;
 }
 .sidebar .s2 {
